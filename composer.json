@@ -1,5 +1,5 @@
 {
-    "name": "Jesusalvaradoh/ix-api-php-client",
+    "name": "dant89/ix-api-client",
     "description": "A PHP Client for the IX-API Project.",
     "keywords": ["api","client", "ixapi", "ix-api"],
     "type": "library",
@@ -23,7 +23,7 @@
     },
     "require": {
         "php": "^7.1",
-        "ext-json": "^1.5 || ^7.4",
+        "ext-json": "*",
         "symfony/http-client": "^4.3"
     },
     "require-dev": {

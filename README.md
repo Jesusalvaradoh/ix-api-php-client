@@ -10,7 +10,7 @@ An unofficial lightweight PHP API client for the [IX-API](https://ix-api.net).
 To install, run `composer require dant89/ixapi-client` in the root of your project or add `dant89/ix-api-client` to your composer.json.
 ```json
 "require": {
-    "dant89/ix-api-client": "^0.0.4"
+    "dant89/ix-api-client": "^LATEST_VERSION_TAG"
 }
 ```
 
@@ -19,8 +19,6 @@ To install, run `composer require dant89/ixapi-client` in the root of your proje
 Use your provided key / secret credentials for the given implementor URL to return and then set a bearer token:
 
 ```php
-<?php
-
 use Dant89\IXAPIClient\Client;
 
 // Create base client
@@ -39,8 +37,6 @@ if ($response->getStatus() === 200) {
 
 With the bearer token set, you can return data from all endpoints that require authentication, such as the products endpoints:
 ```php
-<?php
-
 // Query for products
 $response = $client->getHttpClient('products')
     ->getProducts();
