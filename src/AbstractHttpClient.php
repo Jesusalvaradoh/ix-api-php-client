@@ -28,11 +28,12 @@ abstract class AbstractHttpClient implements HttpClientInterface
     /**
      * AbstractHttpClient constructor.
      * @param Client $client
+     * @param \Symfony\Contracts\HttpClient\HttpClientInterface $httpClient
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, \Symfony\Contracts\HttpClient\HttpClientInterface $httpClient = null)
     {
         $this->client = $client;
-        $this->httpClient = HttpClient::create([
+        $this->httpClient = $httpClient ?? HttpClient::create([
             'headers' => [
                 'User-Agent' => 'IX-API-PHP-CLIENT/0.0.4',
             ]

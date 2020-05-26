@@ -40,12 +40,18 @@ class Client
     private $bearerToken;
 
     /**
+     * @var \Symfony\Contracts\HttpClient\HttpClientInterface 
+     */
+    private $httpClient;
+
+    /**
      * Client constructor.
      * @param string $exchangeUrl
      */
-    public function __construct(string $exchangeUrl)
+    public function __construct(string $exchangeUrl, \Symfony\Contracts\HttpClient\HttpClientInterface $httpClient)
     {
         $this->baseUrl = $exchangeUrl;
+        $this->httpClient = $httpClient;
     }
 
     /**
@@ -90,63 +96,63 @@ class Client
     {
         switch ($name) {
             case 'auth':
-                $client = new AuthClient($this);
+                $client = new AuthClient($this, $this->httpClient);
                 break;
 
             case 'connections':
-                $client = new ConnectionsClient($this);
+                $client = new ConnectionsClient($this, $this->httpClient);
                 break;
 
             case 'contacts':
-                $client = new ContactsClient($this);
+                $client = new ContactsClient($this, $this->httpClient);
                 break;
 
             case 'customers':
-                $client = new CustomersClient($this);
+                $client = new CustomersClient($this, $this->httpClient);
                 break;
 
             case 'demarcs':
-                $client = new DemarcsClient($this);
+                $client = new DemarcsClient($this, $this->httpClient);
                 break;
 
             case 'devices':
-                $client = new DevicesClient($this);
+                $client = new DevicesClient($this, $this->httpClient);
                 break;
 
             case 'facilities':
-                $client = new FacilitiesClient($this);
+                $client = new FacilitiesClient($this, $this->httpClient);
                 break;
 
             case 'ips':
-                $client = new IpsClient($this);
+                $client = new IpsClient($this, $this->httpClient);
                 break;
 
             case 'macs':
-                $client = new MacsClient($this);
+                $client = new MacsClient($this, $this->httpClient);
                 break;
 
             case 'network-features':
-                $client = new NetworkFeaturesClient($this);
+                $client = new NetworkFeaturesClient($this, $this->httpClient);
                 break;
 
             case 'network-feature-configs':
-                $client = new NetworkFeatureConfigsClient($this);
+                $client = new NetworkFeatureConfigsClient($this, $this->httpClient);
                 break;
 
             case 'network-services':
-                $client = new NetworkServicesClient($this);
+                $client = new NetworkServicesClient($this, $this->httpClient);
                 break;
 
             case 'network-service-configs':
-                $client = new NetworkServiceConfigsClient($this);
+                $client = new NetworkServiceConfigsClient($this, $this->httpClient);
                 break;
 
             case 'pops':
-                $client = new PopsClient($this);
+                $client = new PopsClient($this, $this->httpClient);
                 break;
 
             case 'products':
-                $client = new ProductsClient($this);
+                $client = new ProductsClient($this, $this->httpClient);
                 break;
 
             default:
