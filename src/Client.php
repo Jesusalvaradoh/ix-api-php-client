@@ -8,6 +8,7 @@ use Dant89\IXAPIClient\Contacts\ContactsClient;
 use Dant89\IXAPIClient\Customers\CustomersClient;
 use Dant89\IXAPIClient\Demarcs\DemarcsClient;
 use Dant89\IXAPIClient\Devices\DevicesClient;
+use Dant89\IXAPIClient\Extension\PriceClient;
 use Dant89\IXAPIClient\Facilities\FacilitiesClient;
 use Dant89\IXAPIClient\Ips\IpsClient;
 use Dant89\IXAPIClient\Macs\MacsClient;
@@ -40,15 +41,16 @@ class Client
     private $bearerToken;
 
     /**
-     * @var \Symfony\Contracts\HttpClient\HttpClientInterface 
+     * @var \Symfony\Contracts\HttpClient\HttpClientInterface
      */
     private $httpClient;
 
     /**
      * Client constructor.
      * @param string $exchangeUrl
+     * @param \Symfony\Contracts\HttpClient\HttpClientInterface|null $httpClient
      */
-    public function __construct(string $exchangeUrl, \Symfony\Contracts\HttpClient\HttpClientInterface $httpClient)
+    public function __construct(string $exchangeUrl, \Symfony\Contracts\HttpClient\HttpClientInterface $httpClient = null)
     {
         $this->baseUrl = $exchangeUrl;
         $this->httpClient = $httpClient;
@@ -90,7 +92,7 @@ class Client
 
     /**
      * @param string $name
-     * @return AuthClient|ConnectionsClient|ContactsClient|CustomersClient|DemarcsClient|DevicesClient|FacilitiesClient|IpsClient|MacsClient|NetworkFeaturesClient|NetworkFeatureConfigsClient|NetworkServicesClient|NetworkServiceConfigsClient|PopsClient|ProductsClient
+     * @return AuthClient|ConnectionsClient|ContactsClient|CustomersClient|DemarcsClient|DevicesClient|FacilitiesClient|IpsClient|MacsClient|NetworkFeaturesClient|NetworkFeatureConfigsClient|NetworkServicesClient|NetworkServiceConfigsClient|PopsClient|ProductsClient|PriceClient
      */
     public function getHttpClient(string $name): AbstractHttpClient
     {
@@ -155,6 +157,9 @@ class Client
                 $client = new ProductsClient($this, $this->httpClient);
                 break;
 
+            case 'extension/price':
+                $client = new PriceClient($this, $this->httpClient);
+                break;
             default:
                 throw new \InvalidArgumentException(sprintf('Undefined api instance called: "%s"', $name));
         }
