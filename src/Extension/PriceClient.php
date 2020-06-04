@@ -15,7 +15,7 @@ use Dant89\IXAPIClient\Response;
 
 class PriceClient extends AbstractHttpClient
 {
-    const URL = '/extension/v1-decix-pricing-v1/quote';
+    const URL = '/extensions/v1-decix-pricing-v1/quote';
 
     public function getPrice(array $filter): Response
     {
