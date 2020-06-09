@@ -36,7 +36,7 @@ class IpsClient extends AbstractHttpClient
     public function patchIp(string $id, array $data): Response
     {
         $url = self::URL . '/' . $id;
-        return $this->put($url, $data);
+        return $this->patch($url, $data);
     }
 
     /**
@@ -47,6 +47,6 @@ class IpsClient extends AbstractHttpClient
     public function putIp(string $id, array $data): Response
     {
         $url = self::URL . '/' . $id;
-        return $this->patch($url, $data);
+        return $this->put($url, $data);
     }
 }
